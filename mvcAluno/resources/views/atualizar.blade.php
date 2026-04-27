@@ -17,10 +17,10 @@
         @csrf
         @method('PUT')
 
-        <input type="text" name="nome"
+        <input type="text" name="nome" 
             value="{{ old('nome', $aluno->nome)}}" required>
 
-        <input type="text" name="email"
+        <input type="text" name="email" 
             value="{{ old('email', $aluno->email)}}" required>
         <button type="submit">Atualizar</button>
     </form>
