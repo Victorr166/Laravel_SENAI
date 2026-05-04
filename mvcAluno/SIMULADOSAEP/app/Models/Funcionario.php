@@ -1,19 +1,20 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Model;
 
-class Departamento extends Model{
+class Aluno extends Model
+{
     protected $fillable = [
         'nome',
-        'dataCriacao',
-        'orcamento',
-        'sigla'
+        'cargo',
+        'email',
+        'dataAdmissao',
+        'salario',
+        'sobreno'
     ];
-
-     public function funcionario(){
+   
+    public function funcionario(){
         return $this->belongsTo(Funcionario::class);
     }
-    
 }

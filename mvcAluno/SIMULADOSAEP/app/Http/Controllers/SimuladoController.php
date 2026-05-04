@@ -31,30 +31,30 @@ class ProdutoController extends Controller{
             'Sigla' => $request->Sigla,
         ]);
 
-        return redirect()->back()->with('success','Produto cadastrado com sucesso!');
+        return redirect()->back()->with('success','Funcionario cadastrado com sucesso!');
     }
 
     public function atualizar($id){
-        $produto = Produto::with('detalhe')->findOrFail($id);
-        $setores = Setor::all();
-        return view('atualizar', compact('produto','setores'));
+        $departamento = departamento::with('detalhe')->findOrFail($id);
+        $funcionarios = Setor::all();
+        return view('atualizar', compact('departamento','funcionarios'));
     }
 
     public function update(Request $request, $id){
 
         $request->validate([
             'nome' => 'required|string|max:255',
-            'quantidade' => 'required|string|max:255',
-            'preco' => 'required|string|max:255',
-            'descricao' => 'required|string|max:255',
-            'tamanho' => 'required|string|max:255',
-            'peso' => 'required|numeric|max:255'
+            'cargo' => 'required|string|max:255',
+            'Email' => 'required|string|max:255',
+            'DataAdmissao' => 'required|string|max:255',
+            'salario' => 'required|string|max:255',
+            'sobrenome' => 'required|numeric|max:255'
         ]);
 
-        $produto = Produto::findOrFail($id);
+        $funcionario = Funcionario::findOrFail($id);
 
         // atualiza produto
-        $produto->update([
+        $funcionario->update([
             'nome' => $request->nome,
             'quantidade' => $request->quantidade,
             'preco' => $request->preco,
