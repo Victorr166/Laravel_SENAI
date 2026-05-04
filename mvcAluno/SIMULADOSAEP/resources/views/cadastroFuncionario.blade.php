@@ -1,108 +1,77 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_','-',app()->getLocale()) }}">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro Funcionario</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Funcionário - Cadastro</title>
 </head>
 <body>
-    <h1>Cadastro Funcionarios</h1>
+    <header>
+        <h1>Cadastro de Funcionário</h1>
+        <nav>
+            <a href="/funcionario/listar">Listar Funcionários</a>
+        </nav>
+    </header>
+    <main>
+        <form action="{{ route('funcionario.salvar') }}" method="POST">
+            @csrf
+            <br>
+                <h2>Dados Gerais</h2>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+                <br></br>
+            
+                <label for="sobrenome">Sobrenome:</label>
+                <input type="text" id="sobrenome" name="sobrenome" required>
+                <br></br>
+            
+                <label for="cargo">Cargo:</label>
+                <input type="text" id="cargo" name="cargo" required>
+                <br></br>
+            
+                <label for="salario">Salário:</label>
+                <input type="text" id="salario" name="salario" required>
+                <br></br>
 
-    @if(session('success'))
-        <p style="color:green">{{ session('success')}}</p>
-    @endif
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <br></br>
+            
+                <label for="dataAdimissao">Data de Admissão:</label>
+                <input type="date" id="dataAdimissao" name="dataAdimissao" required>
+                <br></br>
 
-    <form action="{{route('funcionario.salvar') }}" method="POST">
-        @csrf
-        <label for="nome">Nome: </label>
-        <input type="text" name="nome" id="nome" placeholder="Nome..."
-            require value="{{ old('nome') }}"
-        >
-        <br><br>
-        <label for="cargo">Cargo: </label>
-        <input type="cargo" name="cargo" id="cargo" placeholder="Cargo..."
-            required value="{{ old('cargo')}}"
-        >
+                <label for="departamento_id">Departamento: </label>
+                <select name="departamento_id" id="departamento_id">
+                    @foreach ($departamentos as $departamento)
+                        <option value="{{$departamento->id}}">{{$departamento->setor}}</option>
+                    @endforeach
+                </select>
 
-        <br><br>
-        <label for="email">Email: </label>
-        <input type="email" name="email" id="email" placeholder="Email..."
-            required value="{{ old('email')}}"
-        >
+            
+                <hr>
+            
+                <br>
+                <h2>Dados Pessoais</h2>
 
-         <br><br>
-        <label for="dataadmissao">DataAdmissao: </label>
-        <input type="dataadmissao" name="dataadmissao" id="dataadmissao" placeholder="DataAdmissao..."
-            required value="{{ old('dataadmissao')}}"
-        >
+                <label for="CPF">CPF:</label>
+                <input type="number" id="CPF" name="CPF" required>
+                <br></br>
 
-        <br><br>
-        <label for="salario">Salario: </label>
-        <input type="salario" name="salario" id="salario" placeholder="Salario..."
-            required value="{{ old('salario')}}"
-        >
+                <label for="rg">RG:</label>
+                <input type="number" id="RG" name="RG" required>
+                <br></br>
 
-        <br><br>
-        <label for="funcionario_id">ID DO FUNCIONARIO: </label>
-        {{-- <input type="number" name="turma_id" id="turma_id" placeholder="ID TURMA..."
-            value="{{ old('turma_id')}}"
-        > --}}
-        <select name="funcionario_id" id="funcionario_id">
-            @foreach ($funcionarios as $funcionario)
-                <option value="{{$funcionario->id}}">{{$funcionario->serie}}</option>
-            @endforeach
-        </select>
+                <label for="dataNascimento">Data de Nascimento:</label>
+                <input type="date" id="dataNascimento" name="dataNascimento" required>
+                <br></br>
 
-        <input type="submit" value="Cadastrar">
-
-        <h1>Cadastro dadosPessoais</h1>
-
-         <form action="{{route('funcionario.salvar') }}" method="POST">
-        @csrf
-        <label for="cpf">Cpf: </label>
-        <input type="text" name="cpf" id="cpf" placeholder="Cpf..."
-            require value="{{ old('cpf') }}"
-        >
-        <br><br>
-        <label for="">rg: </label>
-        <input type="rg" name="rg" id="rg" placeholder="RG..."
-            required value="{{ old('rg')}}"
-        >
-
-        <br><br>
-        <label for="dataNascimento">dataNascimento: </label>
-        <input type="dataNascimento" name="dataNascimento" id="dataNascimento" placeholder="dataNascimento..."
-            required value="{{ old('dataNascimento')}}"
-        >
-
-         <br><br>
-        <label for="cep">cep: </label>
-        <input type="cep" name="cep" id="cep" placeholder="Cep..."
-            required value="{{ old('cep')}}"
-        >
-
-        <br><br>
-        <label for="funcionario_id">ID DO FUNCIONARIO: </label>
-        {{-- <input type="number" name="turma_id" id="turma_id" placeholder="ID TURMA..."
-            value="{{ old('turma_id')}}"
-        > --}}
-        <select name="funcionario_id" id="funcionario_id">
-            @foreach ($funcionarios as $funcionario)
-                <option value="{{$funcionario->id}}">{{$funcionario->serie}}</option>
-            @endforeach 
-        </select>
-
-        <input type="submit" value="Cadastrar">
-    </form>
-
-    @if($errors->any())
-        <div style="color:red">
-            <ul>
-                @foreach ($errors->all() as $erro)
-                    <li>{{ $erro }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+                <label for="CEP">CEP:</label>
+                <input type="number" id="CEP" name="CEP" required>
+                <br></br>
+            
+                <button type="submit">Cadastrar</button>
+        </form>
 </body>
 </html>

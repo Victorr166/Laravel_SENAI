@@ -1,19 +1,20 @@
 <?php
-
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Model;
 
-class Departamento extends Model{
+Class Departamento extends Model{
+
+    protected $table = 'Departamento';
+
     protected $fillable = [
-        'nome',
-        'dataCriacao',
+        'setor',
         'orcamento',
-        'sigla'
+        'dataCriacao'
     ];
 
-     public function funcionario(){
-        return $this->belongsTo(Funcionario::class);
+    public function funcionario(){
+        return $this->hasMany(Funcionario::class);
     }
-    
 }
+
+?>
